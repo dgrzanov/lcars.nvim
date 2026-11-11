@@ -1,0 +1,40 @@
+*lcars.txt*  LCARS Classic colorscheme for Neovim 0.9+
+
+USAGE                                                       *lcars*
+
+After installing dgrzanov/lcars.nvim on your runtimepath: >vim
+    colorscheme lcars
+<
+CONFIGURATION                                               *lcars-setup*
+
+Call setup before applying the colorscheme. Setup is optional. >lua
+    require("lcars").setup({
+      transparent = false,
+      italic_comments = true,
+      overrides = {},
+    })
+    vim.cmd.colorscheme("lcars")
+<
+Each setup call starts from defaults. Apply the colorscheme again after setup.
+Transparency affects main windows and sign/fold columns, not menus or floats.
+The theme enables 'termguicolors' and sets 'background' to dark.
+
+Overrides are a map of highlight names to |nvim_set_hl()| definitions, or a
+function receiving the palette and returning that map. Each definition replaces
+the whole group. >lua
+    require("lcars").setup({
+      overrides = function(c)
+        return { Comment = { fg = c.comment, italic = false } }
+      end,
+    })
+<
+PALETTE                                                     *lcars-palette*
+
+require("lcars").palette() returns a copy of the palette. Keys use underscores,
+for example african_violet, almond_creme, orange, text, black, and selection.
+
+LUALINE                                                     *lcars-lualine*
+>lua
+    require("lualine").setup({ options = { theme = "lcars" } })
+<
+ vim:tw=78:ts=8:noet:ft=help:norl:
